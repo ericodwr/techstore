@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ocirestore.transaction tree view -->
+<record id="ocirestore_transaction_view_tree" model="ir.ui.view">
+  <field name="name">Transaction</field>
+  <field name="model">ocirestore.transaction</field>
+  <field name="arch" type="xml">
+    <tree>
+      <!-- Add your fields here -->
+      <field name="name"/>
+      <field name="client"/>
+      <field name="transaction_date"/>
+      <field name="total_qty"/>
+      <field name="total_pay"/>
+      <field name="transaction_ids"/>
+    </tree>
+  </field>
+</record>
+
+<!-- ocirestore.transaction form view -->
+<record id="ocirestore_transaction_view_form" model="ir.ui.view">
+  <field name="name">Transaction Form</field>
+  <field name="model">ocirestore.transaction</field>
+  <field name="arch" type="xml">
+    <form string="Transaction">
+      <sheet>
+        <group>
+          <!-- Add your fields here -->
+          <field name="name"/>
+          <field name="client"/>
+          <field name="transaction_date"/>
+          <field name="total_qty"/>
+          <field name="total_pay"/>
+        </group>
+        <group name="data" string="Form Products">
+          <field name="transaction_ids">
+            <tree editable='bottom'>
+              <field name="products_id"/>
+              <field name="price"/>
+              <field name="qty"/>
+              <field name="total_price" sum='Total' />
+            </tree>
+          </field>
+        </group>
+      </sheet>
+    </form>
+  </field>
+</record>
+
+
+
+  <!-- ocirestore.transaction action window -->
+  <record id="ocirestore_transaction_action" model="ir.actions.act_window">
+    <field name="name">Transaction</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">ocirestore.transaction</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- This Menu Item must have a parent and an action -->
+  <menuitem id="ocirestore_transaction_menu_act" 
+  name="Transaction" 
+  parent="ocirestore_menu_root" 
+  action="ocirestore_transaction_action" 
+  sequence="40"/>
+
+</odoo>

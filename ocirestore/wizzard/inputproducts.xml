@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- ocirestore.inputproducts form view -->
+  <record id="ocirestore_inputproducts_view_form_wizzard" model="ir.ui.view">
+    <field name="name">ocirestore.inputproducts.view.form</field>
+    <field name="model">ocirestore.inputproducts</field>
+    <field name="arch" type="xml">
+      <form string="Input">
+          <group>
+            <!-- Add your fields here -->
+            <field name="product_id"/>
+            <field name="add_stock"/>
+          </group>
+          <footer>
+            <button  name="button_inputproducts" type="object" string="Input Barang" class='btn btn-success' />
+            <button string="Cancel" special='cancel' class='btn btn-danger' />
+          </footer>
+      </form>
+    </field>
+  </record>
+
+  <!-- ocirestore.inputproducts action window -->
+  <record id="ocirestore_inputproducts_action_wizzard" model="ir.actions.act_window">
+    <field name="name">Input Products</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">ocirestore.inputproducts</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref='ocirestore_inputproducts_view_form_wizzard' />
+    <field name="target">new</field>
+  </record>
+
+  <!-- This Menu Item must have a parent and an action -->
+  <menuitem id="ocirestore_inputproducts_menu_act_wizzard" 
+  name="Input Products" 
+  parent="ocirestore_input_categ" 
+  action="ocirestore_inputproducts_action_wizzard"
+  sequence="10"/>
+
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- ocirestore.products tree view -->
+  <record id="ocirestore_products_view_tree" model="ir.ui.view">
+    <field name="name">Products</field>
+    <field name="model">ocirestore.products</field>
+    <field name="arch" type="xml">
+      <tree>
+        <!-- Add your fields here -->
+        <field name="name"/>
+        <field name="products_id"/>
+        <field name="stock"/>
+        <field name="buy_price"/>
+        <field name="sell_price"/>
+        <field name="supplier_id"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- ocirestore.products form view -->
+  <record id="ocirestore_products_view_form" model="ir.ui.view">
+    <field name="name">Products</field>
+    <field name="model">ocirestore.products</field>
+    <field name="arch" type="xml">
+      <form string="Products">
+        <sheet>
+          <group>
+            <!-- Add your fields here -->
+            <field name="name"/>
+            <field name="products_id"/>
+            <field name="stock"/>
+            <field name="buy_price"/>
+            <field name="sell_price"/>
+            <field name="supplier_id"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- ocirestore.products action window -->
+  <record id="ocirestore_products_action" model="ir.actions.act_window">
+    <field name="name">Products</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">ocirestore.products</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- This Menu Item must have a parent and an action -->
+  <menuitem id="ocirestore_products_menu_act" name="Products" parent="ocirestore_products_categ" 
+  action="ocirestore_products_action" 
+  sequence="20"/>
+
+</odoo>

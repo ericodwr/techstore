@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+  <menuitem id="ocirestore_menu_root" name="Store" sequence="10"/>
+
+  <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+  <menuitem id="executive_menu_root" name="Executive" sequence="20"/>
+
+  <!-- This Menu Item Must have a parent -->
+  <menuitem id="ocirestore_products_categ" name="Products" parent="ocirestore_menu_root" sequence="10"/>
+
+  <!-- This Menu Item Must have a parent -->
+  <!-- <menuitem id="ocirestore_menu_categ" name="Supplier" parent="ocirestore_menu_root" sequence="20"/> -->
+
+  <!-- This Menu Item Must have a parent -->
+  <menuitem id="ocirestore_input_categ" name="Input Data" parent="ocirestore_menu_root" sequence="30"/>
+
+  <!-- This Menu Item Must have a parent -->
+  <menuitem id="ocirestore_transaction_categ" name="Transaction" parent="ocirestore_menu_root" sequence="40"/>
+
+  <!-- This Menu Item Must have a parent -->
+  <menuitem id="ocirestore_positions_categ" name="Positions" parent="executive_menu_root" sequence="10"/>
+
+</odoo>

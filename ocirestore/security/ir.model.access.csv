@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ocirestore_productslist,access.ocirestore.productslist,model_ocirestore_productslist,,1,1,1,1
+access_ocirestore_products,access.ocirestore.products,model_ocirestore_products,,1,1,1,1
+access_ocirestore_supplier,access.ocirestore.supplier,model_ocirestore_supplier,,1,1,1,1
+access_ocirestore_inputproducts,access.ocirestore.inputproducts,model_ocirestore_inputproducts,,1,1,1,1
+access_ocirestore_transaction,access.ocirestore.transaction,model_ocirestore_transaction,,1,1,1,1
+access_ocirestore_detailtransaction,access.ocirestore.detailtransaction,model_ocirestore_detailtransaction,,1,1,1,1

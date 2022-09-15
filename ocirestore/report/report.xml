@@ -1,0 +1,24 @@
+<odoo>
+  <record id="report_supplier_xlsx" model="ir.actions.report">
+    <field name="name">Supplier Excel</field>
+    <field name="model">ocirestore.supplier</field>
+    <field name="report_type">xlsx</field>
+    <field name="report_name">ocirestore.report_supplier_xlsx</field>
+    <field name="report_file">ocirestore.report_supplier_xlsx</field>
+    <field name="binding_model_id" ref="model_ocirestore_supplier"/>
+    <field name="binding_type">report</field>
+  </record>
+
+  <record id="report_transaction_xlsx" model="ir.actions.report">
+    <field name="name">Transaction Excel</field>
+    <field name="model">ocirestore.transaction</field>
+    <field name="report_type">xlsx</field>
+    <field name="report_name">ocirestore.report_transaction_xlsx</field>
+    <field name="report_file">ocirestore.report_transaction_xlsx</field>
+    <field name="binding_model_id" ref="model_ocirestore_transaction"/>
+    <field name="binding_type">report</field>
+  </record>
+  
+
+  
+</odoo>
