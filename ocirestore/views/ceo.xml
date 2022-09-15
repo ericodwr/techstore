@@ -12,6 +12,9 @@
       <xpath expr="//field[@name='function']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
+      <xpath expr="//field[@name='user_id']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
     </field>
   </record>
 
@@ -22,16 +25,20 @@
     <field name="inherit_id" ref="base.view_partner_form"/>
     <field name="arch" type="xml">
       <!-- Add your xpath here -->
+      <xpath expr="//field[@name='vat']" position="after">
+        <field name="is_ceo"/>
+        <field name="is_cto"/>
+      </xpath>
       <xpath expr="//field[@name='function']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
       <xpath expr="//field[@name='category_id']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
-      <xpath expr="//field[@name='vat']" position="after">
-        <field name="is_ceo"/>
-      </xpath>
       <xpath expr="//field[@name='is_ceo']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='is_cto']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
     </field>
