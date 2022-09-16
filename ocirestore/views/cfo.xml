@@ -2,9 +2,8 @@
 <odoo>
 
   <!-- res.partner inherit tree view -->
-  <record id="res_partner_cto_view_tree_inherit" model="ir.ui.view">
-    <field name="name">CTO</field>
-    <field name="mode">extension</field>
+  <record id="res_partner_cfo_view_tree_inherit" model="ir.ui.view">
+    <field name="name">CFO</field>
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_partner_tree"/>
     <field name="arch" type="xml">
@@ -16,47 +15,46 @@
   </record>
 
   <!-- res.partner inherit form view -->
-  <record id="res_partner_cto_view_form_inherit" model="ir.ui.view">
-    <field name="name">res.partner.inherit.view.form</field>
+  <record id="res_partner_cfo_view_form_inherit" model="ir.ui.view">
+    <field name="name">CFO Form</field>
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_partner_form"/>
     <field name="arch" type="xml">
       <!-- Add your xpath here -->
-      <xpath expr="//field[@name='is_cto']" position="attributes">
-        <field name="invisible">1</field>
+      <xpath expr="//field[@name='function']" position="attributes">
+        <attribute name="invisible">1</attribute>
       </xpath>
     </field>
   </record>
 
   <!-- res.partner inherit search view -->
-  <record id="res_partner_cto_inherit_search" model="ir.ui.view">
+  <record id="res_partner_inherit_search" model="ir.ui.view">
     <field name="name">res.partner.inherit.view.search</field>
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_res_partner_filter"/>
     <field name="arch" type="xml">
       <!-- Add your xpath here -->
       <field name="parent_id" position='after'>
-        <filter name="is_cto" string="CTO" domain="[('is_cto', '=', 'True')]"/>
+        <filter name="is_cfo" string="CFO" domain="[('is_cfo', '=', 'True')]"/>
       </field>
     </field>
   </record>
 
-
   <!-- res.partner action window -->
-  <record id="res_partner_cto_action" model="ir.actions.act_window">
-    <field name="name">Chief Technology Officer</field>
+  <record id="res_partner_cfo_action" model="ir.actions.act_window">
+    <field name="name">Chief Financial Officer</field>
     <field name="type">ir.actions.act_window</field>
     <field name="res_model">res.partner</field>
     <field name="view_mode">tree,form,kanban</field>
     <field name="context">
       {
-        'search_default_is_cto':1,
-        'default_is_cto':True,
+        'search_default_is_cfo':1,
+        'default_is_cfo':True,
       }
     </field>
   </record>
 
   <!-- This Menu Item must have a parent and an action -->
-  <menuitem id="cto_menu_act" name="CTO" parent="executive_menu_root" action="res_partner_cto_action" sequence="20"/>
+  <menuitem id="cfo_menu_act" name="CFO" parent="executive_menu_root" action="res_partner_cfo_action" sequence="40"/>
 
 </odoo>

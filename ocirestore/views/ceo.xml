@@ -28,6 +28,9 @@
       <xpath expr="//field[@name='vat']" position="after">
         <field name="is_ceo"/>
         <field name="is_cto"/>
+        <field name="is_coo"/>
+        <field name="is_cfo"/>
+        <field name="is_cmo"/>
       </xpath>
       <xpath expr="//field[@name='function']" position="attributes">
         <attribute name="invisible">1</attribute>
@@ -41,11 +44,20 @@
       <xpath expr="//field[@name='is_cto']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
+      <xpath expr="//field[@name='is_cfo']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='is_coo']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='is_cmo']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
     </field>
   </record>
 
   <!-- res.partner inherit search view -->
-  <record id="res_partner_inherit_search" model="ir.ui.view">
+  <record id="res_partner_ceo_inherit_search" model="ir.ui.view">
     <field name="name">res.partner.inherit.view.search</field>
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_res_partner_filter"/>
