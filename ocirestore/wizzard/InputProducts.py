@@ -3,6 +3,7 @@ from odoo import api, fields, models
 
 class InputProducts(models.TransientModel):
     _name = 'ocirestore.inputproducts'
+    _description = 'Ya'
 
     product_id = fields.Many2one(
         comodel_name='ocirestore.products', string='Categories')

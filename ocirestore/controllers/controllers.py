@@ -1,10 +1,11 @@
+from crypt import methods
 from odoo import http, models, fields
 from odoo.http import request
 import json
 
 
 class TechstoreAPI(http.Controller):
-    @http.route('/techstoreapi/products', auth='public', method=['GET'])
+    @http.route('/techstoreapi/products', auth='public', methods=['GET'])
     def getProducts(self, **kw):
         productslist = request.env['ocirestore.productslist'].search([])
         productsjson = []

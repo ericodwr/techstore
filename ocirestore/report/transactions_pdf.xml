@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_transaction_pdf" name="template_name">
+    <t t-call="web.html_container">
+      <t t-call="web.internal_layout">
+        <div class="page">
+          <h2>
+            <b>
+          Data Transaction
+            </b>
+          </h2>
+
+          <t t-foreach="docs" t-as="d">
+            <!-- Nota -->
+            <div class="row">
+              <div class="col-4">
+              No. Nota:
+              </div>
+              <div class="col-8">
+                <span t-field='d.name'/>
+              </div>
+            </div>
+
+            <!-- client -->
+            <div class="row">
+              <div class="col-4">
+              Client:
+              </div>
+              <div class="col-8">
+                <span t-field='d.client'/>
+              </div>
+            </div>
+
+            <!-- date -->
+            <div class="row">
+              <div class="col-4">
+              Date:
+              </div>
+              <div class="col-8">
+                <span t-field='d.transaction_date'/>
+              </div>
+            </div>
+
+            <!-- Total Price -->
+            <div class="row">
+              <div class="col-4">
+              Total Payment:
+              </div>
+              <div class="col-8">
+                <span t-field='d.total_pay'/>
+              </div>
+            </div>
+
+            <!-- Total Qty -->
+            <div class="row">
+              <div class="col-4">
+              Total Quantity:
+              </div>
+              <div class="col-8">
+                <span t-field='d.total_qty'/>
+              </div>
+            </div>
+
+            <!-- Products -->
+
+            <div class="row mt-2">
+              <div class="col-4">Products:</div>
+            </div>
+            <ol>
+              <t t-foreach="d.transaction_ids" t-as="product">
+                <li>
+                  <!-- Name -->
+                  <div class="row">
+                    <div class="col-4">
+                    Name:
+                    </div>
+                    <div class="col-6">
+                      <span t-field='product.products_id.name'/>
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Price -->
+                <div class="row">
+                  <div class="col-4">
+                Price:
+                  </div>
+                  <div class="col-6">
+                    <span t-field='product.price'/>
+                  </div>
+                </div>
+
+                <!-- Price -->
+                <div class="row">
+                  <div class="col-4">
+                Quantity:
+                  </div>
+                  <div class="col-6">
+                    <span t-field='product.qty'/>
+                  </div>
+                </div>
+
+                <!-- Total Price -->
+                <div class="row">
+                  <div class="col-4">
+                Total Price:
+                  </div>
+                  <div class="col-6 mb-2">
+                    <span t-field='product.total_price'/>
+                  </div>
+                </div>
+              </t>
+            </ol>
+          </t>
+        </div>
+      </t>
+    </t>
+  </template>
+
+
+</odoo>

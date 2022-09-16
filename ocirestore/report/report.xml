@@ -18,7 +18,17 @@
     <field name="binding_model_id" ref="model_ocirestore_transaction"/>
     <field name="binding_type">report</field>
   </record>
-  
 
-  
+  <record id="report_transaction_pdf" model="ir.actions.report">
+    <field name="name">Transaction PDF</field>
+    <field name="model">ocirestore.transaction</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ocirestore.report_transaction_pdf</field>
+    <field name="report_file">ocirestore.report_transaction_pdf</field>
+    <field name="binding_model_id" ref="model_ocirestore_transaction"/>
+    <field name="binding_type">report</field>
+  </record>
+
+
+
 </odoo>

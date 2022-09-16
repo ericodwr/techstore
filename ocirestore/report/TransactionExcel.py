@@ -3,6 +3,7 @@ from odoo import models, fields
 
 class PartnerXlsx(models.AbstractModel):
     _name = 'report.ocirestore.report_transaction_xlsx'
+    _description = 'Ya'
     _inherit = 'report.report_xlsx.abstract'
     date_report = fields.Date.today()
 

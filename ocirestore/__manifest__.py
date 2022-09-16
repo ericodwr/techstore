@@ -39,6 +39,7 @@
         'views/cmo.xml',
         'wizzard/inputproducts.xml',
         'report/report.xml',
+        'report/transactions_pdf.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
