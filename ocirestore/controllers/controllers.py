@@ -1,21 +1,33 @@
-# -*- coding: utf-8 -*-
-# from odoo import http
+from odoo import http, models, fields
+from odoo.http import request
+import json
 
 
-# class Ocirestore(http.Controller):
-#     @http.route('/ocirestore/ocirestore', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
+class TechstoreAPI(http.Controller):
+    @http.route('/techstoreapi/products', auth='public', method=['GET'])
+    def getProducts(self, **kw):
+        productslist = request.env['ocirestore.productslist'].search([])
+        productsjson = []
+        for products in productslist:
+            productjson = []
+            for product in products.products_ids:
+                supplierjson = []
+                for supplier in product.supplier_id:
+                    supplierjson.append({
+                        'brand': supplier.name
+                    })
+                productjson.append({
+                    'name': product.name,
+                    'stock': product.stock,
+                    'price': product.sell_price,
+                    'supplier': supplierjson
 
-#     @http.route('/ocirestore/ocirestore/objects', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('ocirestore.listing', {
-#             'root': '/ocirestore/ocirestore',
-#             'objects': http.request.env['ocirestore.ocirestore'].search([]),
-#         })
+                })
 
-#     @http.route('/ocirestore/ocirestore/objects/<model("ocirestore.ocirestore"):obj>', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('ocirestore.object', {
-#             'object': obj
-#         })
+            productsjson.append({
+                'category': products.name,
+                'category_id': products.categories_id,
+                'total_products': products.total_products,
+                'products': productjson
+            })
+        return json.dumps(productsjson)
