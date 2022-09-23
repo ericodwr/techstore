@@ -1,52 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<!-- ocirestore.transaction tree view -->
-<record id="ocirestore_transaction_view_tree" model="ir.ui.view">
-  <field name="name">Transaction</field>
-  <field name="model">ocirestore.transaction</field>
-  <field name="arch" type="xml">
-    <tree>
-      <!-- Add your fields here -->
-      <field name="name"/>
-      <field name="client"/>
-      <field name="transaction_date"/>
-      <field name="total_qty"/>
-      <field name="total_pay"/>
-      <field name="transaction_ids"/>
-    </tree>
-  </field>
-</record>
+  <!-- ocirestore.transaction tree view -->
+  <record id="ocirestore_transaction_view_tree" model="ir.ui.view">
+    <field name="name">Transaction</field>
+    <field name="model">ocirestore.transaction</field>
+    <field name="arch" type="xml">
+      <tree>
+        <!-- Add your fields here -->
+        <field name="name"/>
+        <field name="client"/>
+        <field name="transaction_date"/>
+        <field name="total_qty"/>
+        <field name="total_pay"/>
+        <field name="transaction_ids"/>
+        <field name="state"/>
+      </tree>
+    </field>
+  </record>
 
-<!-- ocirestore.transaction form view -->
-<record id="ocirestore_transaction_view_form" model="ir.ui.view">
-  <field name="name">Transaction Form</field>
-  <field name="model">ocirestore.transaction</field>
-  <field name="arch" type="xml">
-    <form string="Transaction">
-      <sheet>
-        <group>
-          <!-- Add your fields here -->
-          <field name="name"/>
-          <field name="client"/>
-          <field name="transaction_date"/>
-          <field name="total_qty"/>
-          <field name="total_pay"/>
-        </group>
-        <group name="data" string="Form Products">
-          <field name="transaction_ids">
-            <tree editable='bottom'>
-              <field name="products_id"/>
-              <field name="price"/>
-              <field name="qty"/>
-              <field name="total_price" sum='Total' />
-            </tree>
-          </field>
-        </group>
-      </sheet>
-    </form>
-  </field>
-</record>
+  <!-- ocirestore.transaction form view -->
+  <record id="ocirestore_transaction_view_form" model="ir.ui.view">
+    <field name="name">Transaction Form</field>
+    <field name="model">ocirestore.transaction</field>
+    <field name="arch" type="xml">
+      <form string="Transaction">
+        <header>
+          <button string="Confirm" name="action_confirm" type="object" class="btn btn-primary" states='draft' confirm='Are you sure to confirm this transaction?'/>
+          <button string="Done" name="action_done" type="object" class="btn btn-success" states='confirm' confirm='Are you sure the transaction is done?'/>
+          <button string="Cancel" name="action_cancel" type="object" class="btn btn-danger" states='confirm' confirm='Are you sure to cancel?'/>
+          <button string="Draft" name="action_draft" type="object" class="btn btn-secondary" states='cancel' confirm='Are you sure to edit this transaction?'/>
+          <button string="Draft" name="action_draft" type="object" class="btn btn-secondary" states='done' confirm='Are you sure to edit this transaction?'/>
+          <field name="state" widget='statusbar' statusbar_visible='draft,confirm,done'/>
+        </header>
+        <sheet>
+          <group>
+            <!-- Add your fields here -->
+            <field name="name" attrs="{'readonly' : [('state', '!=', 'draft')]}"/>
+            <field name="client" attrs="{'readonly' : [('state', '!=', 'draft')]}"/>
+            <field name="transaction_date" attrs="{'readonly' : [('state', '!=', 'draft')]}" />
+            <field name="total_qty"/>
+            <field name="total_pay"/>
+          </group>
+          <group name="data" string="Form Products">
+            <field name="transaction_ids" attrs="{'readonly' : [('state', '!=', 'draft')]}">
+              <tree editable='bottom'>
+                <field name="products_id"/>
+                <field name="price" readonly='True'/>
+                <field name="qty"/>
+                <field name="total_price" sum='Total' readonly='True'/>
+              </tree>
+            </field>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
 
 
 
@@ -59,10 +68,6 @@
   </record>
 
   <!-- This Menu Item must have a parent and an action -->
-  <menuitem id="ocirestore_transaction_menu_act" 
-  name="Transaction" 
-  parent="ocirestore_menu_root" 
-  action="ocirestore_transaction_action" 
-  sequence="40"/>
+  <menuitem id="ocirestore_transaction_menu_act" name="Transaction" parent="ocirestore_menu_root" action="ocirestore_transaction_action" sequence="40"/>
 
 </odoo>

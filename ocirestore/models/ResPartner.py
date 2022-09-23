@@ -9,3 +9,7 @@ class ResPartner(models.Model):
     is_cfo = fields.Boolean(string='CFO')
     is_cto = fields.Boolean(string='CTO')
     is_cmo = fields.Boolean(string='CMO')
+
+    is_membership = fields.Boolean(string='Membership')
+    poin = fields.Integer(
+        string='Poin', domain="[('is_membership', '=', True)]")

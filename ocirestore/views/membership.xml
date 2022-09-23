@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- res.partner inherit tree view -->
+  <record id="res_partner_membership_view_inherit" model="ir.ui.view">
+    <field name="name">Membership</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_tree"/>
+    <field name="arch" type="xml">
+      <!-- Add your xpath here -->
+      <xpath expr="//field[@name='function']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='display_name']" position="after">
+        <field name="poin"/>
+      </xpath>
+    </field>
+  </record>
+
+
+  <!-- res.partner inherit form view -->
+  <record id="res_partner_membership_form_inherit" model="ir.ui.view">
+    <field name="name">Membership Form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <!-- Add your xpath here -->
+      <xpath expr="//field[@name='function']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='category_id']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='vat']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='title']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='mobile']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='child_ids']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='company_type']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//field[@name='parent_id']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+
+    </field>
+  </record>
+
+
+  <!-- res.partner inherit search view -->
+  <record id="res_partner_membership_search_inherit" model="ir.ui.view">
+    <field name="name">res.partner.inherit.view.search</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter"/>
+    <field name="arch" type="xml">
+      <!-- Add your xpath here -->
+      <field name="parent_id" position='after'>
+        <filter name="is_membership" string="Membership" domain="[('is_membership', '=', 'True')]"/>
+      </field>
+    </field>
+  </record>
+
+  <!-- res.partner action window -->
+  <record id="res_partner_membership_action" model="ir.actions.act_window">
+    <field name="name">Membership</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">tree,form</field>
+    <field name="context">
+      {
+        'search_default_is_membership':1,
+        'default_is_membership':True,
+      }
+    </field>
+  </record>
+
+  <!-- This Menu Item must have a parent and an action -->
+  <menuitem id="membership_menu_act" name="Membership" parent="ocirestore_menu_root" action="res_partner_membership_action" sequence="50"/>
+
+</odoo>

@@ -7,7 +7,7 @@ class Transaction(models.Model):
     _description = 'New Description'
 
     name = fields.Char(string='No. Nota')
-    client = fields.Char(string='Name Client')
+    client = fields.Many2one(string='Name Client', comodel_name='res.partner')
     transaction_date = fields.Datetime('Date', default=fields.Datetime.now())
     total_pay = fields.Integer(
         compute='_compute_total_pay', string='Total Pay')
@@ -15,6 +15,31 @@ class Transaction(models.Model):
         compute='_compute_total_qty', string='Total Quantity')
     transaction_ids = fields.One2many(
         comodel_name='ocirestore.detailtransaction', inverse_name='transaction_id', string='Transactions')
+
+    state = fields.Selection(string='State', selection=[(
+        'draft', 'Draft'), ('confirm', 'confirm'), ('done', 'Done'), ('cancel', 'Cancelled'), ], required=True, readonly=True, default='draft')
+
+    # state
+
+    def action_confirm(self):
+        self.write({
+            'state': 'confirm'
+        })
+
+    def action_done(self):
+        self.write({
+            'state': 'done'
+        })
+
+    def action_cancel(self):
+        self.write({
+            'state': 'cancel'
+        })
+
+    def action_draft(self):
+        self.write({
+            'state': 'draft'
+        })
 
     # Constraints
     _sql_constraints = [
@@ -40,19 +65,36 @@ class Transaction(models.Model):
                 pass
         return record
 
-    # Delete Transaction
-    @api.ondelete(at_uninstall=False)
-    def _ondelete_transaction(self):
-        if self.transaction_ids:
-            data = []
-            for rec in self:
-                data = self.env['ocirestore.detailtransaction'].search(
-                    [('transaction_id', '=', rec.id)])
+    # Delete Transaction (Odoo 15)
+    # @api.ondelete(at_uninstall=False)
+    # def _ondelete_transaction(self):
+    #     if self.transaction_ids:
+    #         data = []
+    #         for rec in self:
+    #             data = self.env['ocirestore.detailtransaction'].search(
+    #                 [('transaction_id', '=', rec.id)])
 
-            for newdata in data:
-                newdata.products_id.stock += newdata.qty
+    #         for newdata in data:
+    #             newdata.products_id.stock += newdata.qty
+
+    # Delete Transaction (Odoo < 15)
+    def unlink(self):
+        if self.filtered(lambda line: line.state != 'draft'):
+            raise ValidationError(
+                'Only can delete the transaction if state status is "Draft"!')
+        else:
+            if self.transaction_ids:
+                data = []
+                for rec in self:
+                    data = self.env['ocirestore.detailtransaction'].search(
+                        [('transaction_id', '=', rec.id)])
+                for newData in data:
+                    newData.products_id.stock += newData.qty
+
+        return super().unlink()
 
     # Count total price
+
     @api.depends('transaction_ids')
     def _compute_total_pay(self):
         for rec in self:

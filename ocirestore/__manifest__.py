@@ -37,9 +37,12 @@
         'views/coo.xml',
         'views/cfo.xml',
         'views/cmo.xml',
+        'views/membership.xml',
         'wizzard/inputproducts.xml',
+        'wizzard/transactionreport.xml',
         'report/report.xml',
         'report/transactions_pdf.xml',
+        'report/wizzard_transaction.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

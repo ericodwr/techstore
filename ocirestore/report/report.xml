@@ -29,6 +29,16 @@
     <field name="binding_type">report</field>
   </record>
 
+  <record id="wizzard_transaction_report_pdf" model="ir.actions.report">
+    <field name="name">Wizzard Transaction PDF</field>
+    <field name="model">ocirestore.transactionreport</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ocirestore.wizzard_transaction_report_pdf_tmp</field>
+    <field name="report_file">ocirestore.wizzard_transaction_report_pdf_tmp</field>
+    <field name="binding_model_id" ref="model_ocirestore_transactionreport"/>
+    <field name="binding_type">report</field>
+  </record>
+
 
 
 </odoo>
